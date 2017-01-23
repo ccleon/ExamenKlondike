@@ -2,10 +2,13 @@ package controllers;
 
 import java.util.Stack;
 
-import models.Card;
+import models.FrenchCard;
 import models.Game;
-import models.Pile;
-import models.Rank;
+import models.SpanishCard;
+import models.SpanishPile;
+import models.SpanishRank;
+import models.FrenchPile;
+import models.FrenchRank;
 import models.State;
 import utils.LimitedIntDialog;
 
@@ -18,8 +21,8 @@ public class PileToPileController extends OperationController{
 	public void movePileToPile(){
 		int origin = new LimitedIntDialog("De que escalera?", 1, 7).read() -1;
 		int dest = new LimitedIntDialog("A que escalera?", 1, 7).read() -1;
-		Pile pileOrigin = this.getPiles().get(origin);
-		Pile pileDest = this.getPiles().get(dest);
+		FrenchPile pileOrigin = this.getPiles().get(origin);
+		FrenchPile pileDest = this.getPiles().get(dest);
 		int quantity = new LimitedIntDialog("Cuantas?", 1, pileOrigin.getVisibleCards().size()).read();
 		
 		if (!pileOrigin.isEmpty()){
@@ -28,9 +31,9 @@ public class PileToPileController extends OperationController{
 					pileDest.pushCard(pileOrigin.popCard());
 				}else { errorReport.generalError(); }
 			}else{
-				Stack<Card> visibleCards = pileOrigin.getVisibleCards();
-				Card temp = visibleCards.elementAt(quantity-1);
-				Pile tempPile = new Pile(22);
+				Stack<FrenchCard> visibleCards = pileOrigin.getVisibleCards();
+				FrenchCard temp = visibleCards.elementAt(quantity-1);
+				FrenchPile tempPile = new FrenchPile(22);
 				
 				if (suitablePile(pileDest, temp)){
 					for (int i=0; i<quantity; i++){
@@ -44,14 +47,57 @@ public class PileToPileController extends OperationController{
 		}else{ errorReport.specificError("ERROR: la escalera origen está vacía"); }
 	}
 	
-	public boolean suitablePile(Pile pile, Card card){
+	public boolean suitablePile(FrenchPile pile, FrenchCard card){
 		if (pile.isEmpty()){
-			if (card.getRank() == Rank.KING) 
+			if (card.getRank() == FrenchRank.KING) 
 				return true;
 		}else{
-			if (card.getRank() != Rank.KING){
-				Card destCard = pile.peekCard();
+			if (card.getRank() != FrenchRank.KING){
+				FrenchCard destCard = pile.peekCard();
 				if (card.isNextRank(destCard) && !card.sameColor(destCard))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public void movePileToPile2(){
+		int origin = new LimitedIntDialog("De que escalera?", 1, 7).read() -1;
+		int dest = new LimitedIntDialog("A que escalera?", 1, 7).read() -1;
+		SpanishPile pileOrigin = this.getSpPiles().get(origin);
+		SpanishPile pileDest = this.getSpPiles().get(dest);
+		int quantity = new LimitedIntDialog("Cuantas?", 1, pileOrigin.getVisibleCards().size()).read();
+		
+		if (!pileOrigin.isEmpty()){
+			if (quantity == 1){
+				if (suitablePile2(pileDest, pileOrigin.peekSpCard())) {
+					pileDest.pushSpCard(pileOrigin.popSpCard());
+				}else { errorReport.generalError(); }
+			}else{
+				Stack<SpanishCard> visibleCards = pileOrigin.getVisibleCards();
+				SpanishCard temp = visibleCards.elementAt(quantity-1);
+				SpanishPile tempPile = new SpanishPile(22);
+				
+				if (suitablePile2(pileDest, temp)){
+					for (int i=0; i<quantity; i++){
+						tempPile.pushSpCard(pileOrigin.popSpCard());
+					}
+					for (int j=0; j<quantity; j++){
+						pileDest.pushSpCard(tempPile.popSpCard());
+					}
+				}else{ errorReport.generalError(); }
+			}
+		}else{ errorReport.specificError("ERROR: la escalera origen está vacía"); }
+	}
+	
+	public boolean suitablePile2(SpanishPile pile, SpanishCard card){
+		if (pile.isEmpty()){
+			if (card.getRank() == SpanishRank.REY) 
+				return true;
+		}else{
+			if (card.getRank() != SpanishRank.REY){
+				SpanishCard destCard = pile.peekSpCard();
+				if (card.isNextRank(destCard) && !card.sameSuit(destCard))
 					return true;
 			}
 		}

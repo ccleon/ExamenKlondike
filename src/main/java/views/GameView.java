@@ -5,9 +5,12 @@ import models.State;
 
 public class GameView implements OperationControllerVisitor{
 	
+	private int suitOption;
+	
 	public void interact(OperationController controller) {
 		assert controller != null;
-		controller.accept(this);}
+		controller.accept(this);
+	}
 		
 
 	@Override
@@ -21,21 +24,39 @@ public class GameView implements OperationControllerVisitor{
 			optionInputController.setState(State.EXIT);
 		}else{
 			optionInputController.setState();
-			new BoardView(optionInputController).showAllParts();
+			new BoardView(optionInputController, suitOption).showAllParts();
 			optionInputController.setOption(new MenuView().readOptionMenu());
 		}
+	}
+	
+	@Override
+	public void visit(SuitOptionController suitOptionController) {
+		suitOptionController.setState();
+		new BoardView (suitOptionController, 1);
+		suitOptionController.setOption(new SuitOptionView().readOptionSuit());
+		suitOption = suitOptionController.getSuitOption();
+		
 	}
 
 	@Override
 	public void visit(DeckToWasteController deckToWasteController) {
 		deckToWasteController.setState();
-		deckToWasteController.moveDeckToWaste();
+		if (suitOption == 2){	
+			deckToWasteController.moveDeckToWaste();
+		}else{
+			deckToWasteController.moveDeckToWaste2();
+		}
 	}
 
 	@Override
 	public void visit(WasteToDeckController wasteToDeckController) {
 		wasteToDeckController.setState();
-		wasteToDeckController.moveWasteToDeck();
+		if (suitOption ==2){	
+			wasteToDeckController.moveWasteToDeck();
+		}else{
+			wasteToDeckController.moveWasteToDeck2();
+			
+		}
 	}
 
 	@Override
@@ -47,36 +68,63 @@ public class GameView implements OperationControllerVisitor{
 	@Override
 	public void visit(FoundationToPileController foundationToPileController) {
 		foundationToPileController.setState();
-		foundationToPileController.moveFoundationToPile();
+		if (suitOption ==2){	
+			foundationToPileController.moveFoundationToPile();
+		}else{
+			foundationToPileController.moveFoundationToPile2();
+		}
 	}
 
 	@Override
 	public void visit(PileToFoundationController pileToFoundationController) {
 		pileToFoundationController.setState();
-		pileToFoundationController.movePileToFoundation();
+		if (suitOption ==2){	
+			pileToFoundationController.movePileToFoundation();
+		}else{
+			pileToFoundationController.movePileToFoundation2();
+		}
 	}
 
 	@Override
 	public void visit(PileToPileController pileToPileController) {
 		pileToPileController.setState();
-		pileToPileController.movePileToPile();
+		if (suitOption ==2){	
+			pileToPileController.movePileToPile();
+		}else{
+			pileToPileController.movePileToPile2();
+		}
 	}
 
 	@Override
 	public void visit(TurnUpCardInPileController turnUpCardInPileController) {
 		turnUpCardInPileController.setState();
-		turnUpCardInPileController.turnUpCardInPile();
+		if (suitOption ==2){	
+			turnUpCardInPileController.turnUpCardInPile();
+		}else{
+			turnUpCardInPileController.turnUpCardInPile2();
+		}
 	}
 
 	@Override
 	public void visit(WasteToFoundationController wasteToFoundationController) {
 		wasteToFoundationController.setState();
-		wasteToFoundationController.moveWasteToFoundation();
+		if (suitOption ==2){	
+			wasteToFoundationController.moveWasteToFoundation();
+		}else{
+			wasteToFoundationController.moveWasteToFoundation2();
+		}
 	}
 
 	@Override
 	public void visit(WasteToPileController wasteToPileController) {
 		wasteToPileController.setState();
-		wasteToPileController.moveWasteToPile();
+		if (suitOption ==2){	
+			wasteToPileController.moveWasteToPile();
+		}else{
+			wasteToPileController.moveWasteToPile2();
+		}
 	}
+
+
+	
 }

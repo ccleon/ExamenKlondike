@@ -1,9 +1,9 @@
 package models;
 
-public class Pile extends CardStack{
+public class SpanishPile extends SpanishCardStack {
 	int whichPile;
 	
-	public Pile (int whichPile){
+	public SpanishPile (int whichPile){
 		this.whichPile = whichPile;
 	}
 	

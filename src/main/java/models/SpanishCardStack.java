@@ -1,13 +1,13 @@
 package models;
 
-import java.util.Stack;
 import java.util.Collections;
+import java.util.Stack;
 
-public class CardStack {
-	protected Stack<Card> cardStack;
+public class SpanishCardStack {
+	protected Stack<SpanishCard> cardStack;
 	
-	public CardStack(){
-		cardStack = new Stack<Card>();
+	public SpanishCardStack(){
+		cardStack = new Stack<SpanishCard>();
 	}
 	
 	public void shuffle(){
@@ -22,31 +22,31 @@ public class CardStack {
 		return this.cardStack.empty();
 	}
 	
-	public Card popCard(){
+	public SpanishCard popSpCard(){
 		return this.cardStack.pop();
 	}
 	
-	public void pushCard(Card card){
+	public void pushSpCard(SpanishCard card){
 		this.cardStack.push(card);
 	}
 	
-	public Card peekCard(){
+	public SpanishCard peekSpCard(){
 		return this.cardStack.peek();
 	}
 	
 	public void turnDownAll (){
-		for (Card card : this.cardStack){
+		for (SpanishCard card : this.cardStack){
 			card.setTurnedUp(false);
 		}
 	}
 	
-	public Stack<Card> getVisibleCards(){
-		Stack<Card> stack = new Stack<Card>();
+	public Stack<SpanishCard> getVisibleCards(){
+		Stack<SpanishCard> stack = new Stack<SpanishCard>();
 		stack.addAll(cardStack);
-		Stack<Card> visibleCards = new Stack<Card>();
+		Stack<SpanishCard> visibleCards = new Stack<SpanishCard>();
 		
 		for(int i=0; i<this.size(); i++){
-			Card topCard = stack.peek();
+			SpanishCard topCard = stack.peek();
 			if (topCard.isTurnedUp()){
 				visibleCards.push(stack.pop());
 			}
@@ -71,4 +71,5 @@ public class CardStack {
 			return stackString;
 		}
 	}
+
 }

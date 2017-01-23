@@ -1,18 +1,18 @@
 package models;
 
-public class Foundation extends CardStack{
-	private Suit suit;
+public class FrenchFoundation extends FrenchCardStack{
+	private FrenchSuit suit;
 	
-	public Foundation(Suit suit){
+	public FrenchFoundation(FrenchSuit suit){
 		super();
 		this.suit = suit;
 	}
 	
-	public boolean sameSuit(Card card){
+	public boolean sameSuit(FrenchCard card){
 		return card.getSuit() == suit;
 	}
 	
-	public Suit getSuit (){
+	public FrenchSuit getSuit (){
 		return suit;
 	}
 	

@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Foundation;
+import models.FrenchFoundation;
 import models.Game;
 import models.State;
 
@@ -20,7 +20,7 @@ public class OptionInputController extends OperationController{
 	}
 	
 	public boolean isGameFinished() {
-		for (Foundation foundation : this.getFoundations()) {
+		for (FrenchFoundation foundation : this.getFoundations()) {
 			if (foundation.size() != 12){
 				return false;
 			}

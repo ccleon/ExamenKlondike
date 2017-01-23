@@ -21,6 +21,18 @@ public class WasteToDeckController extends OperationController{
 		}
 	}
 	
+	public boolean moveWasteToDeck2(){
+		if (this.getSpDeck().isEmpty()){
+			while(!this.getSpWaste().isEmpty()){
+				this.getSpDeck().pushSpCard(this.getSpWaste().popSpCard());
+			}
+			return true;
+		}else{
+			errorReport.generalError();
+			return false;
+		}
+	}
+	
 	@Override
 	public void setState() {
 		this.setState(State.SELECT_OPTION);

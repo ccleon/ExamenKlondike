@@ -1,6 +1,6 @@
 package models;
 
-public class Waste extends FrenchCardStack{
+public class SpanishWaste  extends SpanishCardStack{
 	@Override
 	public String toString(){
 		if(this.cardStack.isEmpty()){
@@ -9,5 +9,4 @@ public class Waste extends FrenchCardStack{
 			return super.toString();
 		}
 	}
-
 }

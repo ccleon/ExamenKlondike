@@ -1,6 +1,6 @@
 package models;
 
-public enum Rank {
+public enum FrenchRank {
 	
 	ACE ("A"),
 	TWO ("2"),
@@ -17,17 +17,17 @@ public enum Rank {
 	KING ("K");
 	private String rank;
 	
-	private Rank (String rank){
+	private FrenchRank (String rank){
 		this.rank = rank;
 	}
 	
-	public Rank nextRank(){
-		Rank[] ranks = values();
+	public FrenchRank nextRank(){
+		FrenchRank[] ranks = values();
 		return ranks[(this.ordinal() + 1) % ranks.length];
 	}
 	
-	public Rank previousRank(){
-		Rank[] ranks = values();
+	public FrenchRank previousRank(){
+		FrenchRank[] ranks = values();
 		return ranks[(this.ordinal() -1) % ranks.length];
 	}
 	

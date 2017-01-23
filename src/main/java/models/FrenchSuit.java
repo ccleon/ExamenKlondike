@@ -1,6 +1,6 @@
 package models;
 
-public enum Suit {
+public enum FrenchSuit {
 	
 	HEARTS("h"),
 	DIAMONDS("d"),
@@ -8,11 +8,11 @@ public enum Suit {
 	SPADES("s");
 	private String value;
 	
-	private Suit (String value){
+	private FrenchSuit (String value){
 		this.value = value;
 	}
 	
-	public String getSuit(){
+	public String getFrenchSuit(){
 		return value;
 	}
 }

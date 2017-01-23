@@ -1,13 +1,18 @@
 package controllers;
 
 import models.Game;
+import models.SpanishDeck;
+import models.SpanishFoundation;
+import models.SpanishPile;
+import models.SpanishSuit;
+import models.SpanishWaste;
 import models.State;
 import java.util.List;
-import models.Deck;
+import models.FrenchDeck;
 import models.Waste;
-import models.Foundation;
-import models.Pile;
-import models.Suit;
+import models.FrenchFoundation;
+import models.FrenchPile;
+import models.FrenchSuit;
 
 public abstract class Controller {
 	protected Game game;
@@ -32,23 +37,43 @@ public abstract class Controller {
 		game.setState(state);
 	}
 	
-	public Deck getDeck(){
+	public FrenchDeck getDeck(){
 		return game.getDeck();
+	}
+	
+	public SpanishDeck getSpDeck(){
+		return game.getSpDeck();
 	}
 	
 	public Waste getWaste(){
 		return game.getWaste();
 	}
 	
-	public List<Foundation> getFoundations(){
+	public SpanishWaste getSpWaste(){
+		return game.getSpWaste();
+	}
+	
+	public List<FrenchFoundation> getFoundations(){
 		return game.getFoundations();
 	}
 	
-	public List<Pile> getPiles(){
+	public List<FrenchPile> getPiles(){
 		return game.getPiles();
 	}
 	
-	public Foundation getFoundation(Suit suit){
+	public FrenchFoundation getFoundation(FrenchSuit suit){
+		return game.getFoundation(suit);
+	}
+	
+	public List<SpanishFoundation> getSpFoundations(){
+		return game.getSpanishFoundation();
+	}
+	
+	public List<SpanishPile> getSpPiles(){
+		return game.getSpPiles();
+	}
+	
+	public SpanishFoundation getFoundation (SpanishSuit suit){
 		return game.getFoundation(suit);
 	}
 

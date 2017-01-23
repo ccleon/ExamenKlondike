@@ -12,4 +12,5 @@ public interface OperationControllerVisitor {
 	void visit(WasteToFoundationController wasteToFoundationController);
 	void visit(WasteToPileController wasteToPileController);
 	void visit(OptionInputController optionInputController);
+	void visit(SuitOptionController suitOptionController);
 }

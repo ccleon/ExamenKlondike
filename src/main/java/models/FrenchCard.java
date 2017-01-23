@@ -1,28 +1,28 @@
 package models;
 
-public class Card {
+public class FrenchCard {
 	
-	private Rank rank;
-	private Suit suit;
+	private FrenchRank rank;
+	private FrenchSuit suit;
 	private Color color;
 	private boolean turnedUp;
 
-	public Card (Rank rank, Suit suit){
+	public FrenchCard (FrenchRank rank, FrenchSuit suit){
 		this.rank = rank;
 		this.suit = suit;
 		this.turnedUp = false;
-		if (suit.equals(Suit.CLUBS) || suit.equals(Suit.SPADES)){
+		if (suit.equals(FrenchSuit.CLUBS) || suit.equals(FrenchSuit.SPADES)){
 			this.color = Color.BLACK;
 		}else{
 			this.color = Color.RED;
 		}
 	}
 	
-	public Rank getRank(){
+	public FrenchRank getRank(){
 		return rank;
 	}
 		
-	public Suit getSuit(){
+	public FrenchSuit getSuit(){
 		return suit;
 	}
 	
@@ -38,26 +38,26 @@ public class Card {
 		this.turnedUp = turnedUp;
 	}
 	
-	public boolean sameColor (Card card){
+	public boolean sameColor (FrenchCard card){
 		return card.getColor() == color.getColor();
 	}
 	
-	public boolean sameSuit (Card card){
+	public boolean sameSuit (FrenchCard card){
 		return card.getSuit() == suit;
 	}
 	
-	public boolean isNextRank (Card card){
+	public boolean isNextRank (FrenchCard card){
 		assert card != null;
 		return rank.nextRank() == card.getRank();
 	}
 	
-	public boolean isPreviousRank (Card card){
+	public boolean isPreviousRank (FrenchCard card){
 		assert card != null;
 		return rank.previousRank() == card.getRank();
 	}
 	
 	@Override
 	public String toString (){
-		return "[" + rank.getRank() + ", " + suit.getSuit() + "]";
+		return "[" + rank.getRank() + ", " + suit.getFrenchSuit() + "]";
 	}
 }

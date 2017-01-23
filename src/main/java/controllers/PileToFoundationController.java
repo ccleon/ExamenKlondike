@@ -1,10 +1,14 @@
 package controllers;
 
-import models.Card;
-import models.Foundation;
+import models.FrenchCard;
+import models.FrenchFoundation;
 import models.Game;
-import models.Pile;
-import models.Rank;
+import models.SpanishCard;
+import models.SpanishFoundation;
+import models.SpanishPile;
+import models.SpanishRank;
+import models.FrenchPile;
+import models.FrenchRank;
 import models.State;
 import utils.LimitedIntDialog;
 
@@ -16,12 +20,12 @@ public class PileToFoundationController extends OperationController{
 	
 	public void movePileToFoundation(){
 		int origin = new LimitedIntDialog("De que escalera?", 1, 7).read() -1;
-		Pile pile = this.getPiles().get(origin);
+		FrenchPile pile = this.getPiles().get(origin);
 		
 		if (!pile.isEmpty()){
-			Card card = pile.peekCard();
+			FrenchCard card = pile.peekCard();
 			if (card.isTurnedUp()){
-					Foundation foundation = this.getFoundation(card.getSuit());
+					FrenchFoundation foundation = this.getFoundation(card.getSuit());
 					if (suitableSuitFromPile(card)){
 						foundation.pushCard(pile.popCard());
 					}else{
@@ -35,14 +39,50 @@ public class PileToFoundationController extends OperationController{
 		}
 	}
 	
-	public boolean suitableSuitFromPile(Card card){
-		Foundation foundation = this.getFoundation(card.getSuit());
-		if (card.getRank() == Rank.ACE && foundation.isEmpty()){
+	public boolean suitableSuitFromPile(FrenchCard card){
+		FrenchFoundation foundation = this.getFoundation(card.getSuit());
+		if (card.getRank() == FrenchRank.ACE && foundation.isEmpty()){
 			return true;
 		}else{
 			if (!foundation.isEmpty()){
-				Rank previous = card.getRank().previousRank();
+				FrenchRank previous = card.getRank().previousRank();
 				if (previous == foundation.peekCard().getRank()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void movePileToFoundation2(){
+		int origin = new LimitedIntDialog("De que escalera?", 1, 7).read() -1;
+		SpanishPile pile = this.getSpPiles().get(origin);
+		
+		if (!pile.isEmpty()){
+			SpanishCard card = pile.peekSpCard();
+			if (card.isTurnedUp()){
+					SpanishFoundation foundation = this.getFoundation(card.getSuit());
+					if (suitableSuitFromPile2(card)){
+						foundation.pushSpCard(pile.popSpCard());
+					}else{
+						errorReport.generalError();
+					}
+			}else{
+				errorReport.specificError("ERROR: La carta no está volteada");
+			}
+		}else{
+			errorReport.specificError("ERROR: La escalera está vacía");
+		}
+	}
+	
+	public boolean suitableSuitFromPile2(SpanishCard card){
+		SpanishFoundation foundation = this.getFoundation(card.getSuit());
+		if (card.getRank() == SpanishRank.UNO && foundation.isEmpty()){
+			return true;
+		}else{
+			if (!foundation.isEmpty()){
+				SpanishRank previous = card.getRank().previousRank();
+				if (previous == foundation.peekSpCard().getRank()){
 					return true;
 				}
 			}
